@@ -1,23 +1,36 @@
-name: My First CI/CD Pipeline
+name: Node.js CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main # или master, в зависимости от имени основной ветки вашего репозитория
+      - main # или master
   pull_request:
     branches:
       - main # или master
 
 jobs:
-  build:
+  build-and-test: # Мы объединяем build и test в одну задачу для простоты
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Build Step
-        run: echo "Building the application..."
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x' # Устанавливаем конкретную версию Node.js
 
-      - name: Run Test Step
-        run: echo "Running tests..."
+      - name: Install dependencies
+        run: npm run install-deps # Выполняем наш скрипт из package.json
+
+      - name: Run Build process
+        run: npm run build # Выполняем наш скрипт сборки
+
+      - name: Run Tests
+        run: npm run test # Выполняем наш скрипт тестов
+
+      - name: Check generated files (optional)
+        run: | # Это многострочная команда
+          ls -l dist/
+          cat dist/index.html
