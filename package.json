@@ -1,0 +1,14 @@
+{
+  "name": "my-simple-website",
+  "version": "1.0.0",
+  "description": "A very basic website for CI/CD demo",
+  "main": "index.js",
+  "scripts": {
+    "install-deps": "echo 'Installing project dependencies... (simulated)'",
+    "build": "echo 'Building static assets... (simulated)' && mkdir -p dist && echo '<h1>Hello DevOps!</h1>' > dist/index.html",
+    "test": "echo 'Running unit tests... (simulated)' && exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
